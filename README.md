@@ -1,5 +1,5 @@
 # SOPA_DE_LETRAS
-# Cosas a tener en cuenta
+# Explicacion del codigo
 #### letras: 
 La lista en la cual tenemos las letras del abecedario.
 
@@ -38,10 +38,30 @@ Hay mucha gente, que comete errores ingresando un digito, y puede ser que no se 
 ```
 if Tipo_palabras == "s":
 ```
-Aca quiere decir que
+Aca quiere decir que USTED va a ingresar las palabras, por ende, tenemos que definir ciertas cosas;
 
+"vamor a utilizar ya nuestra lista vacia: Palabras, para ingresar en esta las palabras que queremos."
 
+Primero, un bucle, que se va a repertir segun la cantidad de palabras que tenga la dificultad elegida. ¿Lo recuerdan arriba?. Asi es, es la variable "cantidad_palabras", con esto ya sabemos con hacer un bucle, mientras(while) el largo de nuestra lista(len(Palabras) sea menor a "cantidad_palabras" ejecute... Ahora en codigo
+```
+while len(Palabras) < cantidad_palabras:
+```
+Ahora, tenemos que ingresar las palabras que queremos, para ello usamos un input de esta manera:
 
+```
+palabra = input("Ingrese una palabra: ")
+```
+Con esto tenemos la palabra, pero eso no es todo, aun nos falta ingresar la palabra a la lista, esto lo haremos con un ".append", quedando de esta manera.
+```
+Palabras.append(palabra)
+```
+Codigo completo
+```
+if Tipo_palabras == "s":
+  while len(Palabras) < cantidad_palabras:
+    palabra = input("Ingrese una palabra: ") 
+    Palabras.append(palabra)
+```
 
 
 
