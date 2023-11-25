@@ -62,9 +62,31 @@ if Tipo_palabras == "s":
     palabra = input("Ingrese una palabra: ") 
     Palabras.append(palabra)
 ```
+Ahora hay que pensar y si la persona eligio que no, esta parte es mas simple, creamos una lista con las palabras que va a tomar el programa, y la ingresamos en nuestra lista vacia. Quedando de esta forma:
+```
+elif Tipo_palabras == "n":
+  Palabras = [PALABRAS*]
+```
+#### FUNCIONES
+#### def generar_sopa_de_letras(filas, columnas, palabras):
+IMPORTANTE
+
+Para hacer este codigo descubrimos muchas cosas y nos acordamos de otras tantas, entre ellas esta manera de utilizar el" ' ' " que quiere decir un espacio en blanco, cosa que sera de SUMA SUMA importancia, para continuar con el codigo
 
 
+#### def imprimir_matriz(matriz):
 
+
+#### def direccion_v(palabra, matriz):
+
+
+#### def direccion_dA(palabra, matriz):
+
+
+#### def direccion_dB(palabra, matriz):
+
+
+#### def llenar_espacios_blanco():
 
 
 
