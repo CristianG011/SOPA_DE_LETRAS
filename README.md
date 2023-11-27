@@ -57,7 +57,19 @@ Como se puede observar al emplear random.randint, para la orientación horizonta
 En cuanto a la orientación diagonal, se sigue el siguiente procedimiento: se elige la fila inicial asegurándonos de que la palabra completa quepa; para ello, restamos al largo de la matriz la longitud de la palabra. Este mismo enfoque se aplica a la columna. Ahora, para insertar la palabra en la matriz, se utiliza un bucle que recorre las letras de la palabra, añadiéndolas secuencialmente mediante la suma de una fila y una columna en cada iteración.
 
 #### Crear matriz
+Para crear la matriz utilizamos una lista de letras del abecedario de la función sting, posteriormente con random agarramos  letras al azar de está lista, empezamos con una matriz vacia la cuals se irá modificando mediante un bucle, el cual siguiendo los límites de la matriz va a añadir las letras de manera aleaotoria con el random
+```python
+    letras = list(string.ascii_uppercase)
+    random.shuffle(letras)
 
+    matriz = []
+    for i in range(filas):
+        fila = []
+        for n in range(columnas):
+            fila.append(random.choice(letras))
+        matriz.append(fila)
+    return matriz
+```
 
 #### Imprimir matriz con coordenadas
 
