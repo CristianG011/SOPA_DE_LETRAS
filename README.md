@@ -72,7 +72,12 @@ Haciendo esto pudimos definir "x" filas y "x" columnas y "x" palabras(cantidad d
 y con eso quedaria esta parte
 #### Palabras suyas o del programa
 El programa le va a preguntar si quiere ingresar usted las palabras o por el contrario que las ingrese el mismo, de esta manera;
-
+```python
+    Palabras_ingresadas = []
+    Tipo_palabras = input("¿Quiere ingresar usted las palabras? S/N: ")
+```
+Creamos una lista vacia la cual a la cual ira agregando las palabras segun la eleccion,
+despues si el usuario elije llenar las palabras el, mediante un bucle va a ir pidiendo palabra por palabra metras que largo de la lista "Palabras_ingresadas" sea menor al de cantidad (osea cantidad de palabras)
 
 
 
