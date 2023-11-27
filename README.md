@@ -72,9 +72,20 @@ Para crear la matriz utilizamos una lista de letras del abecedario de la funció
 ```
 
 #### Imprimir matriz con coordenadas
-
-
-#### Ingresar coordenadas
+Para imprimir la matriz con coordenadas, realizamos un bucle que añada las letras y número que definimos, para la letras, lista letras, y para numeros usamos enumerate, de esta manera por cada fila y columna que detecte a a ir añadiendo una letra y un numumero respectivamente
+```python
+def imprimir_matriz_con_coordenadas(matriz):
+    print(" ", end=" ")
+    for i in range(len(matriz[0])):
+        print(f"{i:2}", end=" ")
+    print()
+    letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n','ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'à',  'è' , 'ì' , 'ò', 'ù']
+    for i, fila in enumerate(matriz):
+        print(f"{i:2}", end=" ")
+        for elemento in fila:
+            print(elemento, end="  ")
+        print()
+```
 
 
 #### Dificultad
