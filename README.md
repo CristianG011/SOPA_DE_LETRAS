@@ -1,6 +1,6 @@
 # SOPA DE LETRAS
 
-# Explicación del codigo
+# Explicación del código
 
 **Aclaración**:  En las siguientes secciones, se presentará la primera solución propuesta para abordar el problema, la cual presenta ciertos defectos. Al final, se mostrará la solución definitiva que se implementó para abordar estos problemas. Se detallarán las modificaciones realizadas en el código para solucionar los defectos identificados. Ambas versiones del código están disponibles en un archivo .py para su evaluación y prueba.
 
@@ -72,7 +72,7 @@ Para crear la matriz utilizamos una lista de letras del abecedario de la funció
 ```
 
 #### Imprimir matriz con coordenadas
-Para imprimir la matriz con coordenadas, realizamos un bucle que añada las letras y número que definimos, para la letras, lista letras, y para numeros usamos enumerate, de esta manera por cada fila y columna que detecte a a ir añadiendo una letra y un numumero respectivamente
+Para imprimir la matriz con coordenadas, realizamos un bucle que añada las letras y número que definimos, para la letras, lista letras, y para numeros usamos enumerate, de esta manera por cada fila y columna que detecte va a ir añadiendo una letra y un número respectivamente
 ```python
 def imprimir_matriz_con_coordenadas(matriz):
     print(" ", end=" ")
@@ -188,13 +188,93 @@ Para visualizar la matriz, en forma de sopa de letras (Es decir que no se vea ni
 El resultado anterior se guardó en la lista "matriz_vis" la cual solo sirve para visualización. Ésto es porque al ingresar los datos de ésta forma con el ```.append``` el resultado no va a hacer una lista de listas, por lo que el enfoque dado no va a funcionar. Para esto, se trabajó con la variable "matriz_edit" que si bien al imprimir no se ve del todo bien, nos permite ajustarle las filas y columnas.
 
 
-### Solución a la transposición de las palabras: 
+La siguiente y última función se encarga de gestionar las coordenadas ingresadas por el usuario en el juego de sopa de letras. Inicialmente, se definen las coordenadas x1, y1 y x2, y2 con los valores proporcionados. Luego, se crea una cadena vacía llamada palabra que se utilizará para almacenar la palabra formada por las coordenadas.
+
+La función utiliza condicionales para determinar la orientación de la palabra (horizontal, vertical o diagonal) según las coordenadas proporcionadas. Para la orientación horizontal, se verifica si las coordenadas tienen la misma x, para vertical se verifica si tienen la misma y, y para diagonal se utiliza la diferencia absoluta entre x e y.
+
+En cada caso, la función utiliza bucles para recorrer las letras en la matriz según las coordenadas y construir la palabra. Una vez formada la palabra, se devuelve.
+
+Posteriormente, se inicia un bucle while que continuará ejecutándose mientras haya palabras por encontrar (la variable cantidad_palabras no sea igual a cero). En cada iteración, el usuario ingresa las coordenadas, y la función ingresar_coordenadas se utiliza para obtener la palabra formada por esas coordenadas. Se verifica si la palabra está en la lista de palabras por encontrar "Palabras_ingresadas". Si es así, se marca como encontrada, se elimina de la lista y se actualiza el contador de palabras restantes. Se imprime un mensaje indicando el progreso del jugador. El bucle continúa hasta que todas las palabras hayan sido encontradas, momento en el cual se imprime un mensaje de victoria.
+
+
+
+
+
+
+```python
+def ingresar_coordenadas(matriz, coordenadaA, coordenadaB):
+
+
+    x1, y1 = coordenadaA
+    x2, y2 = coordenadaB
+
+    palabra = ""
+
+    if x1 == x2:
+        if y1 < y2:
+            for j in range(y1, y2 + 1):
+                palabra += matriz[x1][j]
+        else:
+            for j in range(y2, y1 + 1):
+                palabra += matriz[x1][j]
+        return palabra
+
+    if y1 == y2:
+        if x1 < x2:
+            for i in range(x1, x2 + 1):
+                palabra += matriz[i][y1]
+        else:
+            for i in range(x2, x1 + 1):
+                palabra += matriz[i][y1]
+        return palabra
+
+    if abs(x2 - x1) == abs(y2 - y1):
+        if x2 > x1 and y2 > y1:
+            for i in range(x2 - x1 + 1):
+                palabra += matriz[x1 + i][y1 + i]
+        elif x2 > x1 and y2 < y1:
+            for i in range(x2 - x1 + 1):
+                palabra += matriz[x1 + i][y1 - i]
+        elif x2 < x1 and y2 > y1:
+            for i in range(x1 - x2 + 1):
+                palabra += matriz[x1 - i][y1 + i]
+        else:
+            for i in range(x1 - x2 + 1):
+                palabra += matriz[x1 - i][y1 - i]
+        return palabra
+
+    return None
+
+cantidad_palabras = len(Palabras[categoria_seleccionada])
+
+while cantidad_palabras != 0:
+    coordenada1 = (int(input("Ingrese la fila de la coordenada 1: ")), int(input("Ingrese la columna de la coordenada 1: ")))
+    coordenada2 = (int(input("Ingrese la fila de la coordenada 2: ")), int(input("Ingrese la columna de la coordenada 2: ")))
+    intento_palabra = ingresar_coordenadas(matriz_edit, coordenada1, coordenada2)
+
+    palabra_encontrada = False
+    lista_palabras = Palabras[categoria_seleccionada]
+    if intento_palabra in lista_palabras:
+        palabra_encontrada = True
+        lista_palabras.remove(intento_palabra)
+```
+## Solución a la transposición de las palabras: 
 
 Para rellenar la sopa de letras primero se creó inicialmente una matriz utilizando la comprensión de listas, y se rellenó con letras aleatoriamente. Luego se ingresaron las palabras. Utilizando este método se generó un problema principalmente y es la transposición de palabras, se intentaron varias soluciones pero a la final se optó por utilizar la biblioteca numpy para el manejo de matrices.
 
-Se crearon distintas funciones con el fin de generar la matriz y evitar este problema. Pero el resto de la lógica del código se conserva:
+## Funciones importantes
+**Return all**: Devuelve los valores(En este caso filas y columnas) en forma de tupla
 
-El siguiente código resuelve el problema de la transposición. Evaluando si se encuentra un espacio un vacío, para cada dirección en la que se vaya a poner la palabra
+**shape**: Se refiere a la dimensión de la matriz. Hace parte de la librería numpy
+
+**Numpy.full**: Genera una matriz vacía, los elementos se dan en la misma función. En este caso se requiere que la matriz esté vacía
+
+**Random.randint**: Escoge números al azar dentro de un rango especificado
+
+
+**Se crearon distintas funciones con el fin de generar la matriz y evitar este problema. Pero el resto de la lógica del código se conserva:**
+
+El siguiente código resuelve el problema de la transposición. Evaluando si se encuentra un espacio un vacío, para cada dirección en la que se vaya a poner la palabra. 
 ```python
 def esposicionVacia(matriz, fila, col, longitudPalabra, direccion):
     if direccion == 'horizontal':
@@ -375,8 +455,8 @@ def ingresar_coordenadas(matriz, coordenadaA, coordenadaB):
 #Para palabras en vertical
 
     if y1 == y2:                                               #En este caso y no cambia. Por lo tanto "palabra" va a ser vertical
-        if x1 < x2:                                            #Definimos la dirrección con la cual vamos a trabajar
-            for i in range(x1, x2 + 1):                        #Con el bucle por cada iteacción avanza y toma letra por letra hasta llegar al maximo de la coordenada
+        if x1 < x2:                                            #Definimos la dirección con la cual vamos a trabajar
+            for i in range(x1, x2 + 1):                        #Con el bucle por cada itración avanza y toma letra por letra hasta llegar al maximo de la coordenada
                 palabra += matriz[i][y1]
         else:
             for i in range(x2, x1 + 1):                        #La misma situación pero si invirtió el orden 
@@ -385,7 +465,7 @@ def ingresar_coordenadas(matriz, coordenadaA, coordenadaB):
 
 #Para palabras en diagonal
 
-    if abs(x2 - x1) == abs(y2 - y1):                           #Utilizando está formula aseguramos que la coordenada es diagonal
+    if abs(x2 - x1) == abs(y2 - y1):                           #Utilizando esta fórmula aseguramos que la coordenada es diagonal
         if x2 > x1 and y2 > y1:                                #Trabajamos de está manera para cada caso
             for i in range(x2 - x1 + 1):                       #Va avanzando y tomando letra por letra, sumando o  restando 1 de manera vertical y horizontal, hasta llegar al
                 palabra += matriz[x1 + i][y1 + i]              #extremo de la coordenada 
@@ -426,9 +506,11 @@ while cantidad_palabras != 0:                                 #Mientras te falte
         print(f"La palabra {intento_palabra} no hace parte de las palabras por buscar, por favor intente con otra")
 ```
 
-# Muchas gracias por la antencion, esperamos este proyecto haya sido de su agrado.
+# Muchas gracias por la atención, esperamos este proyecto haya sido de su agrado.
 
-### Lista de las palabras
+### Diccionario de palabras
+
+En caso de que el usuario desee que el programa genere las palabras, se hizo el siguiente diccionario el cual almacena las palabras por categorías
 
 ```python
 "Colores": ["AMARILLO", "ROJO", "VERDE", "AZUL", "NARANJA", "NEGRO", "ROSADO", "MORADO", "BLANCO", "DORADO", "PLATEADO", "GRIS", "TURQUESA", "MARRON", "CELESTE", "LIMA", "MAGENTA",
