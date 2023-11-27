@@ -1,6 +1,6 @@
 # SOPA DE LETRAS
-porfa ayudenme subiendo ambos codigos al visual que yo no puedo
-# Explicacion del codigo
+
+# Explicación del codigo
 
 **Aclaración**:  En las siguientes secciones, se presentará la primera solución propuesta para abordar el problema, la cual presenta ciertos defectos. Al final, se mostrará la solución definitiva que se implementó para abordar estos problemas. Se detallarán las modificaciones realizadas en el código para solucionar los defectos identificados. Ambas versiones del código están disponibles en un archivo .py para su evaluación y prueba.
 
@@ -11,8 +11,23 @@ porfa ayudenme subiendo ambos codigos al visual que yo no puedo
 
 
 #### Agregar las palabras a la sopa
-Para agregar las palabras que tenemos a la sopa de letras creamos, la funcion 
+Primero se creó una matriz a partir de letras aleatorias
 ```python
+def crear_matriz(filas, columnas):
+    letras = list(string.ascii_uppercase)
+    random.shuffle(letras)
+
+    matriz = []
+    for i in range(filas):
+        fila = []
+        for n in range(columnas):
+            fila.append(random.choice(letras))
+        matriz.append(fila)
+    return matriz
+```python
+
+Para agregar las palabras que se agregarán posteriormente a la sopa de letras creamos la función 
+
 def agregar_palabras_a_sopa(matriz_edit, lista_palabras):
 ```
 Utilizando un bucle para cada palabra en la lista de palabras. Primero utilizamos un random para que elija al azar alguna direccion, de las siguientes. 'horizontal', 'vertical', 'diagonal'.
@@ -21,7 +36,7 @@ Utilizando un bucle para cada palabra en la lista de palabras. Primero utilizamo
 
         direccion = random.choice(['horizontal', 'vertical', 'diagonal'])
 ```
-despues mediante condicionales vamos a usar una accion segun cual haya sido la eleccion del random.
+Posteriormente, a través de condicionales, procederemos a ejecutar una acción específica según la elección realizada mediante la función random.
 ```python
         if direccion == 'horizontal':
             fila = random.randint(0, len(matriz_edit) - 1)
@@ -37,9 +52,9 @@ despues mediante condicionales vamos a usar una accion segun cual haya sido la e
             fila = random.randint(0, len(matriz_edit) - len(palabra))
             columna = random.randint(0, len(matriz_edit[0]) - len(palabra))
 ```
-Como se puede apreciar utilando random randint,para horizontal tomamos aleatoriamente una fila inicial que puede estar entre 0 y el largo de la matriz(len) menos uno y para la columna se elige aleatoriamente una columna en la matriz de manera que la palabra quepa completamente en esa fila y por eso utilizamos la longitud de la palabra(len(palabra)) y la misma situacion con vertical pero lo que se hizo con filas lo haces con columnas y lo de columnas lo haces con filas
+Como se puede observar al emplear random.randint, para la orientación horizontal, seleccionamos de manera aleatoria una fila inicial entre 0 y la longitud de la matriz (len) menos uno. Asimismo, para la columna, se elige al azar una columna en la matriz, asegurándonos de que la palabra quepa completamente en esa fila. Por este motivo, utilizamos la longitud de la palabra (len(palabra)). La misma lógica se aplica a la orientación vertical, pero intercambiando filas por columnas y viceversa.
 
-Para la diagonal se hizo lo siguiente; eleccion de fila inicial vamos a verificar que entre la palabra completa, para ello le restamos al largo de la matriz el largo de la palabra, de igual manera para la columna, ahora hay que ingresar la palabra a la matriz, para ello se utiliza un bucle que recorre las letras de la palabra y para cada una va a ir añadiendola sumando una fila y una columna.
+En cuanto a la orientación diagonal, se sigue el siguiente procedimiento: se elige la fila inicial asegurándonos de que la palabra completa quepa; para ello, restamos al largo de la matriz la longitud de la palabra. Este mismo enfoque se aplica a la columna. Ahora, para insertar la palabra en la matriz, se utiliza un bucle que recorre las letras de la palabra, añadiéndolas secuencialmente mediante la suma de una fila y una columna en cada iteración.
 
 #### Crear matriz
 
@@ -51,16 +66,16 @@ Para la diagonal se hizo lo siguiente; eleccion de fila inicial vamos a verifica
 
 
 #### Dificultad
-Teniendo cuenta que ahora vamos a empeza a enviar valores a las funciones, toca empezar a utilizar los inputs desde este punto, para ello vamos a llamar las funciones de la siguiente manera
+Teniendo cuenta que ahora vamos a empezar a enviar valores a las funciones, toca empezar a utilizar los inputs desde este punto, para ello vamos a llamar las funciones de la siguiente manera
 
 ```python
 if __name__ == "__main__":
 ```
-Lo primero que le voy a solicitar al usuario el la dificultad, para realizar esto vamos a usar los valores 1, 2, 3 facil, medio y dificil respectivamente:
+Lo primero que le voy a solicitar al usuario es la dificultad, para realizar esto vamos a usar los valores 1, 2, 3 facil, medio y dificil respectivamente:
 ```python
 dificultad = int(input("Ingrese la dificultad. Escriba '1' para dificultad fácil, '2' para dificultad media y '3' para dificultad difícil: "))
 ```
-utilizando condicionales quedaria algo asi:
+Utilizando condicionales quedaría algo asi:
 ```python
     if dificultad == 1:
         filas = 10
@@ -79,21 +94,21 @@ Haciendo esto pudimos definir "x" filas y "x" columnas y "x" palabras(cantidad d
 ```python
     matriz_edit = crear_matriz(filas, columnas)
 ```
-y con eso quedaria esta parte
+
 #### Palabras suyas o del programa
-El programa le va a preguntar si quiere ingresar usted las palabras o por el contrario que las ingrese el mismo, de esta manera;
+El programa le va a preguntar si quiere ingresar usted las palabras o por el contrario que las ingrese él mismo, de esta manera:
 ```python
     Palabras_ingresadas = []
     Tipo_palabras = input("¿Quiere ingresar usted las palabras? S/N: ")
 ```
-Para verificar que las letras sean las que se solicita usamos un mientras que no sean esas letras, el programa va a volver a pedir letras
+
+Para verificar que las letras coincidan con las solicitadas, implementamos un bucle while que continúa solicitando letras hasta que estas sean las adecuadas.
 ```python
     while Tipo_palabras not in ["s", "n"]:
         print("Respuesta no válida. Por favor, ingrese 'S' o 'N'.")
         Tipo_palabras = input("¿Quiere ingresar usted las palabras? S/N: ")
 ```
-Creamos una lista vacia la cual a la cual ira agregando las palabras segun la eleccion,
-despues si el usuario elije llenar las palabras el, mediante un bucle va a ir pidiendo palabra por palabra metras que largo de la lista "Palabras_ingresadas" sea menor al de cantidad (osea cantidad de palabras), esto se hace de esta manera:
+Creamos una lista vacía que se irá llenando con palabras según la elección del usuario. Luego, si decide llenar las palabras, mediante un bucle, solicitará palabra por palabra mientras la longitud de la lista "Palabras_ingresadas" sea menor que la cantidad especificada (es decir, la cantidad de palabras). Este proceso se lleva a cabo de la siguiente manera:
 ```python
     if Tipo_palabras == "s":
         while len(Palabras_ingresadas) < cantidad:
@@ -101,17 +116,90 @@ despues si el usuario elije llenar las palabras el, mediante un bucle va a ir pi
             Palabras_ingresadas.append(palabra.upper())
         print(Palabras_ingresadas)
 ```
-y las agregamos ahora a la funcion
+Y las agregamos ahora a la función creada anteriormente
 
 ```python
 agregar_palabras_a_sopa(matriz_edit, Palabras_ingresadas)
 ```
+En caso contrario se hace un diccionario con distintas categorías y palabras. El diccionario permitirá que el mismo usuario escoja las categorías:
+ elif Tipo_palabras == "N" or Tipo_palabras == "n":
 
+ ```python
+        Palabras = {
+    "Naturaleza": ["CASA", "PERRO", "GATO", "JARDIN", "SOL", "CIUDAD", "PLAYA", "MONTANA", "ESTRELLA", "NUBE", "LLUVIA", "MAR", "LAGO", "RIO", "FLOR", "ARBOL"],
+    "Colores": ["AMARILLO", "ROJO", "VERDE", "AZUL", "NARANJA", "NEGRO", "ROSADO", "MORADO", "BLANCO", "DORADO", "CELESTE", "GRIS", "PLATEADO", "CAFE", "LILA"],
+    "Objetos": ["LAPIZ", "COMPUTADORA", "LIBRO", "MESA", "SILLA", "SOMBRERO", "ZAPATOS", "ROPA", "BOLSA", "TELEVISOR", "TECHO", "VENTANA", "PUERTA", "ROPERO","ESPEJO"],
+    "Alimentación": ["MANZANA", "BANANA", "HUEVO", "LECHE", "FRUTA", "VERDURA", "CARNE", "PESCADO", "POLLO", "ARROZ", "PAN", "AGUA", "VINO", "CERVEZA", "CAFE", "TE", "JUGO", "HELADO",
+                     "PASTEL", "CHOCOLATE", "CARAMELO", "PIZZA", "HAMBURGUESA", "ENSALADA", "SOPA", "QUESO", "GALLETA", "TOSTADA", "PATATA", "MAIZ", "PIZZA", "PASTA",
+                     "SUSHI", "ENSALADA", "TACOS", "POLLO", "SOPA", "FILETE", "CURRY", "PAELLA", "LASAÑA", "PASTEL", "TAPAS", "SANDWICH", "BURRITO", "RISOTTO", "CEVICHE",
+                     "EMPANADAS","CHURRASCO"],
+    "Emociones": ["AMOR", "FELICIDAD", "TRISTEZA", "MIEDO", "ENOJO", "SORPRESA", "ASOMBRO", "VERGUENZA", "CONFUSIÓN", "ORGULLO", "CULPA", "CELOS", "GRATITUD", "ESPERANZA", "DOLOR", "EMPATIA",
+                  "COMPASION", "DESPRECIO", "ANSIEDAD", "ESTUPOR", "DESESPERACION", "ABURRIMIENTO", "NOSTALGIA", "CULPA", "HOSTILIDAD", "EUFORIA",
+                  "INSEGURIDAD", "ADMIRACION", "SATISFACCION", "IMPACIENCIA", "DESDEN", "INCERTIDUMBRE", "AVERSION", "ESTIMA", "CAUTELA", "ALIVIO", "ENTUSIASMO", "RESIGNACIÓN", "AGOBIO",
+                  "CURIOSIDAD"],
+    "Transporte":["COCHE", "AUTOBUS", "TREN", "METRO", "BICICLETA", "MOTOCICLETA", "AVION", "BARCO", "TRANVIA", "CAMION", "HELICOPTERO", "TAXI", "PATINETA", "TRINEO", "AMBULANCIA", "BARCA",
+                  "SUBMARINO", "TRACTOR", "CANOA"],
+    "Animales": ["DELFIN", "BALLENA", "TIBURON", "TORTUGA", "ELEFANTE", "JIRAFA", "LEON", "TIGRE", "OSO", "LOBO", "ZORRO", "CONEJO", "ARDILLA", "NUTRIA", "CASTOR", "CIERVO", "JABALI",
+                 "PUMA", "LEOPARDO", "PANTERA", "COCODRILO", "LAGARTO", "IGUANA", "CAMALEON", "SERPIENTE", "VIBORA", "ARANA", "ESCORPION", "ABEJA", "AVISPA", "MOSQUITO", "MARIPOSA",
+                 "POLILLA", "ESCARABAJO", "CUCARACHA", "MOSCA", "HORMIGA", "CIGARRA", "SALTAMONTES"],
+    "Acciones y actividades": ["TRABAJO", "ESTUDIAR", "JUGAR", "CORRER", "CAMINAR", "BAILAR", "CANTAR", "DORMIR", "COMER", "BEBER", "REIR", "LLORAR", "SONAR", "PENSAR", "HABLAR",
+                               "ESCUCHAR", "VER", "SENTIR", "TOCAR", "OLER", "GUSTAR", "DISFRUTAR", "VIAJAR", "CONDUCIR", "NADAR", "SURFEAR", "ESQUIAR", "MONTAR", "SALTAR", "CAER",
+                               "LEVANTAR", "EMPUJAR", "JALAR", "ABRIR", "CERRAR", "EMPACAR", "ENVIAR", "RECIBIR", "REGALAR", "COMPRAR", "VENDER", "CAMBIAR", "BUSCAR", "ENCONTRAR",
+                               "PERDER", "GANAR", "COMPETIR", "AYUDAR", "APRENDER", "ENSENAR", "CONOCER", "CREER", "DUDAR", "ESPERAR", "QUERER", "AMAR", "ODIAR", "OLVIDAR", "RECORDAR",
+                               "DESEAR", "NECESITAR", "PODER", "DEBER", "SER", "ESTAR", "IR", "VENIR", "QUEDAR", "PARTIR", "LLEGAR", "SALIR", "VOLVER", "ANDAR", "PASEAR", "VISITAR",
+                               "CONOCER", "INVITAR", "ACEPTAR", "RECHAZAR", "PROBAR", "EXPERIMENTAR", "REALIZAR", "CREAR", "DIBUJAR", "PINTAR", "ESCRIBIR", "LEER", "RESOLVER", "CELEBRAR",
+                               "ORGANIZAR", "PREPARAR", "COCINAR", "HORNEAR", "PICAR", "CORTAR", "MEZCLAR", "BATIR", "HERVIR", "FREIR", "ASAR", "ALQUILAR", "COMPARTIR", "CUIDAR",
+                               "PROTEGER", "RESPETAR", "TRATAR", "ESFORZARSE", "DESCANSAR", "RELAJARSE", "MEDITAR", "RESPIRAR", "EXHALAR", "INHALAR", "SOPLAR", "SILBAR", "SONREIR",
+                               "ABRAZAR", "BESAR", "ESTRECHAR", "ACARICIAR", "MIRAR", "OBSERVAR", "VIGILAR", "ANALIZAR", "PENSAR", "REFLEXIONAR", "IMAGINAR", "COMPRENDER", "ENTENDER",
+                               "ASIMILAR", "DUDAR", "CUESTIONAR", "INVESTIGAR", "EXPLORAR", "DESCUBRIR", "ADMIRAR", "APRECIAR", "VALORAR", "DISFRUTAR", "APROVECHAR", "APLAUDIR",
+                               "ELOGIAR", "FELICITAR", "CRITICAR", "REPROCHAR", "EXIGIR", "PEDIR", "SOLICITAR", "CONSEGUIR", "OBTENER", "GANAR", "SACRIFICAR", "RENUNCIAR", "DESECHAR",
+                               "RECHAZAR", "EVITAR", "PREVENIR", "SUPERAR", "VENCER", "ESCAPAR", "HUIR", "ESCONDER", "OCULTAR", "MOSTRAR", "REVELAR", "EXPONER", "DEMOSTRAR", "EXPLICAR",
+                               "COMUNICAR", "TRANSMITIR", "INTERCAMBIAR", "DIALOGAR", "NEGOCIAR", "RESOLVER", "CONFRONTAR", "ENFRENTAR", "ASUMIR", "ACEPTAR", "PERDONAR", "CONVENCER",
+                               "PERSUADIR"],
+    "Países": ["EEUU", "CHINA", "RUSIA", "INDIA", "BRASIL", "MEXICO",
+               "CANADA", "FRANCIA", "ALEMANIA", "ITALIA", "JAPON", "AUSTRALIA", "ESPAÑA", "COREA", "SUDAFRICA", "NIGERIA", "ARGENTINA", "TURQUIA", "INDONESIA", "EGIPTO", "ISRAEL",
+               "COLOMBIA", "PERU"],
+    "Animes": ["NARUTO", "ONEPIECE", "DRAGONBALL", "ATTACKONTITAN", "DEATHNOTE", "MYHEROACADEMIA", "ONEPUNCHMAN", "TOKYOGHOUL", "DEMONSLAYER", "EVANGELION", "BLEACH", "BLACKCLOVER",
+               "JUJUTSUKAISEN", "CODEGEASS", "VIOLETEVERGARDEN", "HAIKYUU", "PROMISEDNEVERLAND", "CHAINSAWMAN", "DRSTONE", "BEASTARS", "MONSTER", "LOVEISWAR", "POKEMON", "FIREFORCE", "BAKI"],
+    "Videojuegos": ["MARIOKART", "ZELDA", "MINECRAFT", "TETRIS",
+                    "GTAV", "FORTNITE", "OVERWATCH", "CALLOFDUTY", "LOL", "RESIDENTEVIL", "HALO", "GODOFWAR", "ASSASSINSCREED", "DARKSOULS", "GENSHINIMPACT", "COUNTERSTRIKE",
+                    "ROCKETLEAGUE", "APEXLEGENDS"]}
+```
 
+El siguiente código permite interactuar con el usuario. Permite mostrar las categorías, la opción de que se escojan, luego las guarda en una lista para poder agregarlas a la sopa de letras y escoge una cantidad asociada a la dificultad de palabras aleatorias dentro de la categoría escogida.
 
+```python
+   Palabras_ingresadas.append(Palabras)                                                    #Se agregan las palabaras a la lista "Palabras_ingresadas"
+   categorias = list(Palabras.keys())                                                      #Almacena todas las llaves las cuales son las categorías, en una lista
+   categoria_elegida = input(f"Ingrese una categoría(Escríbela tal cual): {categorias}")   #Muestra todas las categorías y da la opción de escoger una
 
+#Creamos un if para asegurarnos de que la categoría ingresada exista en el diccionario
 
+   if categoria_elegida in Palabras:
+            valor = Palabras[categoria_elegida]                        #Almacena las palabras asociadas a las categorías
+            Palabras_ingresadas = random.sample(valor, cantidad)       #Escoge palabras aleatoriamente. Teniendo en cuenta que escogerá el número de palabras asociadas a su dificultad
+            print()
+            print("Todas las palabras están en singular")
+            print()
+            print(Palabras_ingresadas)
+            print()
+            categoria_seleccionada = categoria_elegida                 #Guardar la categoria elegida
+   else:
+            print("La categoría ingresada no está en el diccionario.")
+```
+Para visualizar la matriz, en forma de sopa de letras (Es decir que no se vea ni con comas ni corchetes) se van recorrieron las filas y columnas con un for de la siguiente manera
+   ```python
+   matriz_vis = []
 
+    for fila in matriz_edit:
+        fila_actual = []
+        for elemento in fila:
+            fila_actual.append(elemento)
+        matriz_vis.append(fila_actual)
+
+    imprimir_matriz_con_coordenadas(matriz_vis)
+```
+El resultado anterior se guardó en la lista "matriz_vis" la cual solo sirve para visualización. Ésto es porque al ingresar los datos de ésta forma con el ```.append``` el resultado no va a hacer una lista de listas, por lo que el enfoque dado no va a funcionar. Para esto, se trabajó con la variable "matriz_edit" que si bien al imprimir no se ve del todo bien, nos permite ajustarle las filas y columnas.
 
 
 ### Solución a la transposición de las palabras: 
@@ -194,7 +282,9 @@ df = pd.DataFrame(resultado_sopa, columns=col_names)    #Para las coordenadas se
 
 print(df)   #Imprime la matriz resultante
 ```
-Éstos fueron los cambios sustanciales que se realizaron. Los siguientes códigos no fueron modificados a excepción de algunas variables, que fueron necesarias cambiar para su buen funcionamiento:
+Éstos fueron los cambios sustanciales que se realizaron.
+
+**Los siguientes códigos no fueron modificados a excepción de algunas variables, que fueron necesarias cambiar para su buen funcionamiento:**
 ```python
 #El siguiente código define la dificultad del juego. Entre más fácil será más pequeña la matriz y tendrá menos palabras. La dificultad está definida por el usuario
 
