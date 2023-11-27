@@ -31,40 +31,48 @@ Como se puede apreciar utilando random randint,para horizontal tomamos aleatoria
 
 Para la diagonal se hizo lo siguiente; eleccion de fila inicial vamos a verificar que entre la palabra completa, para ello le restamos al largo de la matriz el largo de la palabra, de igual manera para la columna, ahora hay que ingresar la palabra a la matriz, para ello se utiliza un bucle que recorre las letras de la palabra y para cada una va a ir añadiendola sumando una fila y una columna.
 
-#### crear matriz
+#### Crear matriz
 
 
-#### imprimir matriz con coordenadas
+#### Imprimir matriz con coordenadas
 
 
-#### Tipo_palabras = Tipo_palabras.lower()
+#### Ingresar coordenadas
 
-#### dificultad: 
 
-#### while Tipo_palabras not in ["s", "n"]:
-
-```
+#### Dificultad
+Teniendo cuenta que ahora vamos a empeza a enviar valores a las funciones, toca empezar a utilizar los inputs desde este punto, para ello vamos a llamar las funciones de la siguiente manera
 
 ```
-#### FUNCIONES
+if __name__ == "__main__":
+```
+Lo primero que le voy a solicitar al usuario el la dificultad, para realizar esto vamos a usar los valores 1, 2, 3 facil, medio y dificil respectivamente:
+```
+dificultad = int(input("Ingrese la dificultad. Escriba '1' para dificultad fácil, '2' para dificultad media y '3' para dificultad difícil: "))
+```
+utilizando condicionales quedaria algo asi:
+```
+    if dificultad == 1:
+        filas = 10
+        columnas = 10
+        cantidad = 5
+    elif dificultad == 2:
+        filas = 20
+        columnas = 20
+        cantidad = 10
+    elif dificultad == 3:
+        filas = 30
+        columnas = 30
+        cantidad = 15
+```
+Haciendo esto pudimos definir "x" filas y "x" columnas y "x" palabras(cantidad de palabras) por dificultad, pero ahora tenemos que meter esas dimensiones en la funcion que crea la matriz, eso se hace de la siguiente manera;
+```     
+    matriz_edit = crear_matriz(filas, columnas)
+```
+y con eso quedaria esta parte
+#### Palabras suyas o del programa
+El programa le va a preguntar si quiere ingresar usted las palabras o por el contrario que las ingrese el mismo, de esta manera;
 
-#### def generar_sopa_de_letras(filas, columnas, palabras):
-
-
-
-#### def imprimir_matriz(matriz):
-
-
-#### def direccion_v(palabra, matriz):
-
-
-#### def direccion_dA(palabra, matriz):
-
-
-#### def direccion_dB(palabra, matriz):
-
-
-#### def llenar_espacios_blanco():
 
 
 
