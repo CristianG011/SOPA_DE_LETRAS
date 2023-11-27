@@ -76,9 +76,26 @@ El programa le va a preguntar si quiere ingresar usted las palabras o por el con
     Palabras_ingresadas = []
     Tipo_palabras = input("¿Quiere ingresar usted las palabras? S/N: ")
 ```
+Para verificar que las letras sean las que se solicita usamos un mientras que no sean esas letras, el programa va a volver a pedir letras
+```python
+    while Tipo_palabras not in ["s", "n"]:
+        print("Respuesta no válida. Por favor, ingrese 'S' o 'N'.")
+        Tipo_palabras = input("¿Quiere ingresar usted las palabras? S/N: ")
+```
 Creamos una lista vacia la cual a la cual ira agregando las palabras segun la eleccion,
-despues si el usuario elije llenar las palabras el, mediante un bucle va a ir pidiendo palabra por palabra metras que largo de la lista "Palabras_ingresadas" sea menor al de cantidad (osea cantidad de palabras)
+despues si el usuario elije llenar las palabras el, mediante un bucle va a ir pidiendo palabra por palabra metras que largo de la lista "Palabras_ingresadas" sea menor al de cantidad (osea cantidad de palabras), esto se hace de esta manera:
+```python
+    if Tipo_palabras == "s":
+        while len(Palabras_ingresadas) < cantidad:
+            palabra = input("Ingrese una palabra: ")
+            Palabras_ingresadas.append(palabra.upper())
+        print(Palabras_ingresadas)
+```
+y las agregamos ahora a la funcion
 
+```python
+agregar_palabras_a_sopa(matriz_edit, Palabras_ingresadas)
+```
 
 
 
