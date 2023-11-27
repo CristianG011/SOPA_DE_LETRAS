@@ -333,7 +333,118 @@ if Tipo_palabras == "s" or Tipo_palabras == 'S':
 
 elif Tipo_palabras == "N" or Tipo_palabras == "n":
    Palabras = {
+#Lista al final
 
+}
+
+#Dentro del elif
+
+   Palabras_ingresadas.append(Palabras)                                                    #Se agregan las palabaras a la lista "Palabras_ingresadas"
+   categorias = list(Palabras.keys())                                                      #Almacena todas las llaves las cuales son las categorías, en una lista
+   categoria_elegida = input(f"Ingrese una categoría(Escríbela tal cual): {categorias}")   #Muestra todas las categorías y da la opción de escoger una
+
+#Creamos un if para asegurarnos de que la categoría ingresada exista en el diccionario
+
+   if categoria_elegida in Palabras:
+            valor = Palabras[categoria_elegida]                        #Almacena las palabras asociadas a las categorías
+            Palabras_ingresadas = random.sample(valor, cantidad)       #Escoge palabras aleatoriamente. Teniendo en cuenta que escogerá el número de palabras asociadas a su dificultad
+            print()
+            print("Todas las palabras están en singular")
+            print()
+            print(Palabras_ingresadas)
+            print()
+            categoria_seleccionada = categoria_elegida                 #Guardar la categoria elegida
+   else:
+            print("La categoría ingresada no está en el diccionario.")
+```
+```python
+#Función para que el usuario ingrese las coorenadas                 
+
+def ingresar_coordenadas(matriz, coordenadaA, coordenadaB):
+
+
+    x1, y1 = coordenadaA                                        #Definimos ambas coordenas con números
+    x2, y2 = coordenadaB
+
+    palabra = ""                                                #Creamos una palabra vacía que se usará más tarde 
+
+                                                                #Según los valores númericos de las coordenadas podemos definir en que posicion se encuentran, por ejemplo;
+
+                                                                #horizontal quiere decir que su valores en Y permanecen quietos, mientras que, en x cambia.
+
+                                                                #Para vertical, ocurre la misma situación, pero en este caso los valores se invierten
+                                                                #Y para diagonal, ambos son diferentes 
+
+   #Para palabras en horizontal           
+
+    if x1 == x2:                                                   # Acá apreciamos que x no cambia. Por lo tanto, "palabra" va a ser horizontal
+        if y1 < y2:                                                # Definimos la dirrección con la cual vamos a trabajar
+            for j in range(y1, y2 + 1):                            # Y creamos un bucle para que por cada iteración vaya avanzando y tomando letra por letra hasta llegar al                                                                     #extremo de  la coordenada
+                palabra += matriz[x1][j]                           
+        else:
+            for j in range(y2, y1 + 1):                        #La misma situación pero si invirtió el orden 
+                palabra += matriz[x1][j]
+        return palabra                                         #Develve todas la letras que agarro en orden, formando una "palabra".
+
+#Para palabras en vertical
+
+    if y1 == y2:                                               #En este caso y no cambia. Por lo tanto "palabra" va a ser vertical
+        if x1 < x2:                                            #Definimos la dirrección con la cual vamos a trabajar
+            for i in range(x1, x2 + 1):                        #Con el bucle por cada iteacción avanza y toma letra por letra hasta llegar al maximo de la coordenada
+                palabra += matriz[i][y1]
+        else:
+            for i in range(x2, x1 + 1):                        #La misma situación pero si invirtió el orden 
+                palabra += matriz[i][y1]
+        return palabra                                         #Develve todas la letras que agarro en orden, formando una "palabra".
+
+#Para palabras en diagonal
+
+    if abs(x2 - x1) == abs(y2 - y1):                           #Utilizando está formula aseguramos que la coordenada es diagonal
+        if x2 > x1 and y2 > y1:                                #Trabajamos de está manera para cada caso
+            for i in range(x2 - x1 + 1):                       #Va avanzando y tomando letra por letra, sumando o  restando 1 de manera vertical y horizontal, hasta llegar al
+                palabra += matriz[x1 + i][y1 + i]              #extremo de la coordenada 
+        elif x2 > x1 and y2 < y1:    
+            for i in range(x2 - x1 + 1):
+                palabra += matriz[x1 + i][y1 - i]
+        elif x2 < x1 and y2 > y1:
+            for i in range(x1 - x2 + 1):
+                palabra += matriz[x1 - i][y1 + i]
+        else:
+            for i in range(x1 - x2 + 1):
+                palabra += matriz[x1 - i][y1 - i]
+        return palabra                                        #Develve todas la letras que agarro en orden, formando una "palabra".
+
+    return None
+
+cantidad_palabras = len(Palabras_ingresadas)                  #Para tener un conteo, utilizaremos está variable que cuenta los elemento que hay dentro de la lista
+
+while cantidad_palabras != 0:                                 #Mientras te falten 1 o más palabras el programa se seguirá ejecutando 
+    coordenada1 = (int(input("Ingrese la fila de la coordenada 1: ")), int(input("Ingrese la columna de la coordenada 1: ")))
+    coordenada2 = (int(input("Ingrese la fila de la coordenada 2: ")), int(input("Ingrese la columna de la coordenada 2: ")))
+    intento_palabra = ingresar_coordenadas(resultado_sopa, coordenada1, coordenada2)        #Acá ingresamos las coordenadas dadas a la función
+
+    palabra_encontrada = False                                 #False que utilizaremos más adelante para eliminar palabras      
+
+    #lista_palabras = Palabras[categoria_seleccionada]        
+
+    if intento_palabra in Palabras_ingresadas:                 #Acá lo que hacemos es una prueba, si las letras que recorrio la coordenada forman una palabra que hace parte
+        palabra_encontrada = True                              #de las palabras por buscar, entonces lo valemos como verdad
+        Palabras_ingresadas.remove(intento_palabra)            #Y removemos la palabra de nuestras palabras por encontrar
+
+        cantidad_palabras -= 1                                 #Al contador que teniamos antes, le restamos uno, y así susesivamente hasta que sea cero
+        if cantidad_palabras == 0:                             #Si es cero, quiere decir que encontraste todas las palabras por lo tanto HAS GANADO EL JUEGO
+            print("Felicidades ha ganado el juego")
+        else:                                                  #Sino se repite hasta que sea cero
+          print(f"Felicidades, encontró la palabra {intento_palabra} le faltan {cantidad_palabras} por encontrar ")
+    else:
+        print(f"La palabra {intento_palabra} no hace parte de las palabras por buscar, por favor intente con otra")
+```
+
+# Muchas gracias por la antencion, esperamos este proyecto haya sido de su agrado.
+
+### Lista de las palabras
+
+```python
 "Colores": ["AMARILLO", "ROJO", "VERDE", "AZUL", "NARANJA", "NEGRO", "ROSADO", "MORADO", "BLANCO", "DORADO", "PLATEADO", "GRIS", "TURQUESA", "MARRON", "CELESTE", "LIMA", "MAGENTA",
             "CIAN", "BEIGE", "AGUAMARINA", "VIOLETA"],
 
@@ -394,101 +505,4 @@ elif Tipo_palabras == "N" or Tipo_palabras == "n":
 
 "Deportes": ["FUTBOL", "BALONCESTO", "BEISBOL", "TENIS", "GOLF", "HOCKEY", "CRIQUET", "RUGBY", "ATLETISMO", "NATACION", "CICLISMO", "BOXEO", "SNOWBOARD", "SURF", "SKATEBOARDING",
              "VOLEIBOL", "ESCALADA", "PESCA", "KARATE", "TAEKWONDO", "BOLOS", "BILLAR", "AJEDREZ", "PARKOUR"]
-
-}
-
-#Dentro del elif
-
-   Palabras_ingresadas.append(Palabras)                                                    #Se agregan las palabaras a la lista "Palabras_ingresadas"
-   categorias = list(Palabras.keys())                                                      #Almacena todas las llaves las cuales son las categorías, en una lista
-   categoria_elegida = input(f"Ingrese una categoría(Escríbela tal cual): {categorias}")   #Muestra todas las categorías y da la opción de escoger una
-
-#Creamos un if para asegurarnos de que la categoría ingresada exista en el diccionario
-
-   if categoria_elegida in Palabras:
-            valor = Palabras[categoria_elegida]                        #Almacena las palabras asociadas a las categorías
-            Palabras_ingresadas = random.sample(valor, cantidad)       #Escoge palabras aleatoriamente. Teniendo en cuenta que escogerá el número de palabras asociadas a su dificultad
-            print()
-            print("Todas las palabras están en singular")
-            print()
-            print(Palabras_ingresadas)
-            print()
-            categoria_seleccionada = categoria_elegida                 #Guardar la categoria elegida
-   else:
-            print("La categoría ingresada no está en el diccionario.")
-```
-```python
-#Función para que el usuario ingrese las coorenadas
-
-def ingresar_coordenadas(matriz, coordenadaA, coordenadaB):
-
-
-    x1, y1 = coordenadaA
-    x2, y2 = coordenadaB
-
-    palabra = ""
-
-#Para palabras en horizontal
-
-    if x1 == x2:
-        if y1 < y2:
-            for j in range(y1, y2 + 1):
-                palabra += matriz[x1][j]
-        else:
-            for j in range(y2, y1 + 1):
-                palabra += matriz[x1][j]
-        return palabra
-
-#Para palabras en vertical
-
-    if y1 == y2:
-        if x1 < x2:
-            for i in range(x1, x2 + 1):
-                palabra += matriz[i][y1]
-        else:
-            for i in range(x2, x1 + 1):
-                palabra += matriz[i][y1]
-        return palabra
-
-#Para palabras en diagonal
-
-    if abs(x2 - x1) == abs(y2 - y1):
-        if x2 > x1 and y2 > y1:
-            for i in range(x2 - x1 + 1):
-                palabra += matriz[x1 + i][y1 + i]
-        elif x2 > x1 and y2 < y1:
-            for i in range(x2 - x1 + 1):
-                palabra += matriz[x1 + i][y1 - i]
-        elif x2 < x1 and y2 > y1:
-            for i in range(x1 - x2 + 1):
-                palabra += matriz[x1 - i][y1 + i]
-        else:
-            for i in range(x1 - x2 + 1):
-                palabra += matriz[x1 - i][y1 - i]
-        return palabra
-
-    return None
-
-cantidad_palabras = len(Palabras_ingresadas)
-
-while cantidad_palabras != 0:
-    coordenada1 = (int(input("Ingrese la fila de la coordenada 1: ")), int(input("Ingrese la columna de la coordenada 1: ")))
-    coordenada2 = (int(input("Ingrese la fila de la coordenada 2: ")), int(input("Ingrese la columna de la coordenada 2: ")))
-    intento_palabra = ingresar_coordenadas(resultado_sopa, coordenada1, coordenada2)
-
-    palabra_encontrada = False
-
-    #lista_palabras = Palabras[categoria_seleccionada]
-
-    if intento_palabra in Palabras_ingresadas:
-        palabra_encontrada = True
-        Palabras_ingresadas.remove(intento_palabra)
-
-        cantidad_palabras -= 1
-        if cantidad_palabras == 0:
-            print("Felicidades ha ganado el juego")
-        else:
-          print(f"Felicidades, encontró la palabra {intento_palabra} le faltan {cantidad_palabras} por encontrar ")
-    else:
-        print(f"La palabra {intento_palabra} no hace parte de las palabras por buscar, por favor intente con otra")
 ```
