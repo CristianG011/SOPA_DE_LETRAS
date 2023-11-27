@@ -125,45 +125,8 @@ En caso contrario se hace un diccionario con distintas categorías y palabras. E
  elif Tipo_palabras == "N" or Tipo_palabras == "n":
 
  ```python
-        Palabras = {
-    "Naturaleza": ["CASA", "PERRO", "GATO", "JARDIN", "SOL", "CIUDAD", "PLAYA", "MONTANA", "ESTRELLA", "NUBE", "LLUVIA", "MAR", "LAGO", "RIO", "FLOR", "ARBOL"],
-    "Colores": ["AMARILLO", "ROJO", "VERDE", "AZUL", "NARANJA", "NEGRO", "ROSADO", "MORADO", "BLANCO", "DORADO", "CELESTE", "GRIS", "PLATEADO", "CAFE", "LILA"],
-    "Objetos": ["LAPIZ", "COMPUTADORA", "LIBRO", "MESA", "SILLA", "SOMBRERO", "ZAPATOS", "ROPA", "BOLSA", "TELEVISOR", "TECHO", "VENTANA", "PUERTA", "ROPERO","ESPEJO"],
-    "Alimentación": ["MANZANA", "BANANA", "HUEVO", "LECHE", "FRUTA", "VERDURA", "CARNE", "PESCADO", "POLLO", "ARROZ", "PAN", "AGUA", "VINO", "CERVEZA", "CAFE", "TE", "JUGO", "HELADO",
-                     "PASTEL", "CHOCOLATE", "CARAMELO", "PIZZA", "HAMBURGUESA", "ENSALADA", "SOPA", "QUESO", "GALLETA", "TOSTADA", "PATATA", "MAIZ", "PIZZA", "PASTA",
-                     "SUSHI", "ENSALADA", "TACOS", "POLLO", "SOPA", "FILETE", "CURRY", "PAELLA", "LASAÑA", "PASTEL", "TAPAS", "SANDWICH", "BURRITO", "RISOTTO", "CEVICHE",
-                     "EMPANADAS","CHURRASCO"],
-    "Emociones": ["AMOR", "FELICIDAD", "TRISTEZA", "MIEDO", "ENOJO", "SORPRESA", "ASOMBRO", "VERGUENZA", "CONFUSIÓN", "ORGULLO", "CULPA", "CELOS", "GRATITUD", "ESPERANZA", "DOLOR", "EMPATIA",
-                  "COMPASION", "DESPRECIO", "ANSIEDAD", "ESTUPOR", "DESESPERACION", "ABURRIMIENTO", "NOSTALGIA", "CULPA", "HOSTILIDAD", "EUFORIA",
-                  "INSEGURIDAD", "ADMIRACION", "SATISFACCION", "IMPACIENCIA", "DESDEN", "INCERTIDUMBRE", "AVERSION", "ESTIMA", "CAUTELA", "ALIVIO", "ENTUSIASMO", "RESIGNACIÓN", "AGOBIO",
-                  "CURIOSIDAD"],
-    "Transporte":["COCHE", "AUTOBUS", "TREN", "METRO", "BICICLETA", "MOTOCICLETA", "AVION", "BARCO", "TRANVIA", "CAMION", "HELICOPTERO", "TAXI", "PATINETA", "TRINEO", "AMBULANCIA", "BARCA",
-                  "SUBMARINO", "TRACTOR", "CANOA"],
-    "Animales": ["DELFIN", "BALLENA", "TIBURON", "TORTUGA", "ELEFANTE", "JIRAFA", "LEON", "TIGRE", "OSO", "LOBO", "ZORRO", "CONEJO", "ARDILLA", "NUTRIA", "CASTOR", "CIERVO", "JABALI",
-                 "PUMA", "LEOPARDO", "PANTERA", "COCODRILO", "LAGARTO", "IGUANA", "CAMALEON", "SERPIENTE", "VIBORA", "ARANA", "ESCORPION", "ABEJA", "AVISPA", "MOSQUITO", "MARIPOSA",
-                 "POLILLA", "ESCARABAJO", "CUCARACHA", "MOSCA", "HORMIGA", "CIGARRA", "SALTAMONTES"],
-    "Acciones y actividades": ["TRABAJO", "ESTUDIAR", "JUGAR", "CORRER", "CAMINAR", "BAILAR", "CANTAR", "DORMIR", "COMER", "BEBER", "REIR", "LLORAR", "SONAR", "PENSAR", "HABLAR",
-                               "ESCUCHAR", "VER", "SENTIR", "TOCAR", "OLER", "GUSTAR", "DISFRUTAR", "VIAJAR", "CONDUCIR", "NADAR", "SURFEAR", "ESQUIAR", "MONTAR", "SALTAR", "CAER",
-                               "LEVANTAR", "EMPUJAR", "JALAR", "ABRIR", "CERRAR", "EMPACAR", "ENVIAR", "RECIBIR", "REGALAR", "COMPRAR", "VENDER", "CAMBIAR", "BUSCAR", "ENCONTRAR",
-                               "PERDER", "GANAR", "COMPETIR", "AYUDAR", "APRENDER", "ENSENAR", "CONOCER", "CREER", "DUDAR", "ESPERAR", "QUERER", "AMAR", "ODIAR", "OLVIDAR", "RECORDAR",
-                               "DESEAR", "NECESITAR", "PODER", "DEBER", "SER", "ESTAR", "IR", "VENIR", "QUEDAR", "PARTIR", "LLEGAR", "SALIR", "VOLVER", "ANDAR", "PASEAR", "VISITAR",
-                               "CONOCER", "INVITAR", "ACEPTAR", "RECHAZAR", "PROBAR", "EXPERIMENTAR", "REALIZAR", "CREAR", "DIBUJAR", "PINTAR", "ESCRIBIR", "LEER", "RESOLVER", "CELEBRAR",
-                               "ORGANIZAR", "PREPARAR", "COCINAR", "HORNEAR", "PICAR", "CORTAR", "MEZCLAR", "BATIR", "HERVIR", "FREIR", "ASAR", "ALQUILAR", "COMPARTIR", "CUIDAR",
-                               "PROTEGER", "RESPETAR", "TRATAR", "ESFORZARSE", "DESCANSAR", "RELAJARSE", "MEDITAR", "RESPIRAR", "EXHALAR", "INHALAR", "SOPLAR", "SILBAR", "SONREIR",
-                               "ABRAZAR", "BESAR", "ESTRECHAR", "ACARICIAR", "MIRAR", "OBSERVAR", "VIGILAR", "ANALIZAR", "PENSAR", "REFLEXIONAR", "IMAGINAR", "COMPRENDER", "ENTENDER",
-                               "ASIMILAR", "DUDAR", "CUESTIONAR", "INVESTIGAR", "EXPLORAR", "DESCUBRIR", "ADMIRAR", "APRECIAR", "VALORAR", "DISFRUTAR", "APROVECHAR", "APLAUDIR",
-                               "ELOGIAR", "FELICITAR", "CRITICAR", "REPROCHAR", "EXIGIR", "PEDIR", "SOLICITAR", "CONSEGUIR", "OBTENER", "GANAR", "SACRIFICAR", "RENUNCIAR", "DESECHAR",
-                               "RECHAZAR", "EVITAR", "PREVENIR", "SUPERAR", "VENCER", "ESCAPAR", "HUIR", "ESCONDER", "OCULTAR", "MOSTRAR", "REVELAR", "EXPONER", "DEMOSTRAR", "EXPLICAR",
-                               "COMUNICAR", "TRANSMITIR", "INTERCAMBIAR", "DIALOGAR", "NEGOCIAR", "RESOLVER", "CONFRONTAR", "ENFRENTAR", "ASUMIR", "ACEPTAR", "PERDONAR", "CONVENCER",
-                               "PERSUADIR"],
-    "Países": ["EEUU", "CHINA", "RUSIA", "INDIA", "BRASIL", "MEXICO",
-               "CANADA", "FRANCIA", "ALEMANIA", "ITALIA", "JAPON", "AUSTRALIA", "ESPAÑA", "COREA", "SUDAFRICA", "NIGERIA", "ARGENTINA", "TURQUIA", "INDONESIA", "EGIPTO", "ISRAEL",
-               "COLOMBIA", "PERU"],
-    "Animes": ["NARUTO", "ONEPIECE", "DRAGONBALL", "ATTACKONTITAN", "DEATHNOTE", "MYHEROACADEMIA", "ONEPUNCHMAN", "TOKYOGHOUL", "DEMONSLAYER", "EVANGELION", "BLEACH", "BLACKCLOVER",
-               "JUJUTSUKAISEN", "CODEGEASS", "VIOLETEVERGARDEN", "HAIKYUU", "PROMISEDNEVERLAND", "CHAINSAWMAN", "DRSTONE", "BEASTARS", "MONSTER", "LOVEISWAR", "POKEMON", "FIREFORCE", "BAKI"],
-    "Videojuegos": ["MARIOKART", "ZELDA", "MINECRAFT", "TETRIS",
-                    "GTAV", "FORTNITE", "OVERWATCH", "CALLOFDUTY", "LOL", "RESIDENTEVIL", "HALO", "GODOFWAR", "ASSASSINSCREED", "DARKSOULS", "GENSHINIMPACT", "COUNTERSTRIKE",
-                    "ROCKETLEAGUE", "APEXLEGENDS"]}
+        Palabras = {  #nuestras palabras
+    }
 ```
 
 El siguiente código permite interactuar con el usuario. Permite mostrar las categorías, la opción de que se escojan, luego las guarda en una lista para poder agregarlas a la sopa de letras y escoge una cantidad asociada a la dificultad de palabras aleatorias dentro de la categoría escogida.
