@@ -31,10 +31,10 @@ Como se puede apreciar utilando random randint,para horizontal tomamos aleatoria
 
 Para la diagonal se hizo lo siguiente; eleccion de fila inicial vamos a verificar que entre la palabra completa, para ello le restamos al largo de la matriz el largo de la palabra, de igual manera para la columna, ahora hay que ingresar la palabra a la matriz, para ello se utiliza un bucle que recorre las letras de la palabra y para cada una va a ir añadiendola sumando una fila y una columna.
 
-#### Palabras: 
+#### crear matriz
 
 
-#### Tipo_palabras: 
+#### imprimir matriz con coordenadas
 
 
 #### Tipo_palabras = Tipo_palabras.lower()
