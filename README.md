@@ -1,4 +1,5 @@
 # SOPA DE LETRAS
+porfa ayudenme subiendo ambos codigos al visual que yo no puedo
 # Explicacion del codigo
 
 **Aclaración**:  En las siguientes secciones, se presentará la primera solución propuesta para abordar el problema, la cual presenta ciertos defectos. Al final, se mostrará la solución definitiva que se implementó para abordar estos problemas. Se detallarán las modificaciones realizadas en el código para solucionar los defectos identificados. Ambas versiones del código están disponibles en un archivo .py para su evaluación y prueba.
