@@ -2,17 +2,17 @@
 # Explicacion del codigo
 #### Agregar las palabras a la sopa
 Para agregar las palabras que tenemos a la sopa de letras creamos, la funcion 
-```
+```python
 def agregar_palabras_a_sopa(matriz_edit, lista_palabras):
 ```
 Utilizando un bucle para cada palabra en la lista de palabras. Primero utilizamos un random para que elija al azar alguna direccion, de las siguientes. 'horizontal', 'vertical', 'diagonal'.
-```
+```python
     for palabra in lista_palabras:
 
         direccion = random.choice(['horizontal', 'vertical', 'diagonal'])
 ```
 despues mediante condicionales vamos a usar una accion segun cual haya sido la eleccion del random.
-```
+```python
         if direccion == 'horizontal':
             fila = random.randint(0, len(matriz_edit) - 1)
             columna = random.randint(0, len(matriz_edit[0]) - len(palabra))
@@ -43,15 +43,15 @@ Para la diagonal se hizo lo siguiente; eleccion de fila inicial vamos a verifica
 #### Dificultad
 Teniendo cuenta que ahora vamos a empeza a enviar valores a las funciones, toca empezar a utilizar los inputs desde este punto, para ello vamos a llamar las funciones de la siguiente manera
 
-```
+```python
 if __name__ == "__main__":
 ```
 Lo primero que le voy a solicitar al usuario el la dificultad, para realizar esto vamos a usar los valores 1, 2, 3 facil, medio y dificil respectivamente:
-```
+```python
 dificultad = int(input("Ingrese la dificultad. Escriba '1' para dificultad fácil, '2' para dificultad media y '3' para dificultad difícil: "))
 ```
 utilizando condicionales quedaria algo asi:
-```
+```python
     if dificultad == 1:
         filas = 10
         columnas = 10
@@ -66,7 +66,7 @@ utilizando condicionales quedaria algo asi:
         cantidad = 15
 ```
 Haciendo esto pudimos definir "x" filas y "x" columnas y "x" palabras(cantidad de palabras) por dificultad, pero ahora tenemos que meter esas dimensiones en la funcion que crea la matriz, eso se hace de la siguiente manera;
-```     
+```python
     matriz_edit = crear_matriz(filas, columnas)
 ```
 y con eso quedaria esta parte
